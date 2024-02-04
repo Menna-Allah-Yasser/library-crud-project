@@ -5,7 +5,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.example.library.model.Author;
 import com.example.library.model.Books;
 import com.example.library.repository.BooksRepo;
 
@@ -29,7 +31,11 @@ public class BooksService {
 		
 	}
 	
-	public Books updateById(Books newBook){
+//	public List<Books> addBooks(List <Books> books) {
+//		return (List<Books>) booksRepo.saveAll(books);
+//	}
+	
+	public Books update(Books newBook){
 		Books oldBook=findById(newBook.getId());
 		
 		if(newBook.getName() == null) {
@@ -51,6 +57,7 @@ public class BooksService {
 		return booksRepo.save(newBook);
 	}
 	
+	@Transactional
 	public void deleteById(Long id){
 		booksRepo.deleteById(id);
 	}

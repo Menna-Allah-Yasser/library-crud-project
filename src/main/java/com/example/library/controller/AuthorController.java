@@ -1,6 +1,7 @@
 package com.example.library.controller;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,55 +13,54 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.library.model.Books;
-import com.example.library.service.BooksService;
-
-
+import com.example.library.model.Author;
+import com.example.library.service.AuthorService;
+import com.example.library.service.AuthorService;
 
 @RestController
-@RequestMapping("/book")
-public class BooksController {
+@RequestMapping("/author")
+public class AuthorController {
 	
 	@Autowired
-	private BooksService booksService;
+	private AuthorService authorService;
 	
 	@GetMapping("")
 	public ResponseEntity<?> findAll(){
-		return ResponseEntity.ok(booksService.findAll());
+		return ResponseEntity.ok(authorService.findAll());
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> findById(@PathVariable Long id){
-		return ResponseEntity.ok(booksService.findById(id));
+		return ResponseEntity.ok(authorService.findById(id));
 		
 	}
 	
 	@PostMapping("")
-	public ResponseEntity<?> addBook(@RequestBody Books book){
-		return ResponseEntity.ok(booksService.addBook(book));
+	public ResponseEntity<?> addAuthor(@RequestBody Author author){
+		return ResponseEntity.ok(authorService.addAuthor(author));
 		
 	}
 	
-//	@PostMapping("/addBooks")
-//	public ResponseEntity<?> addBooks(@RequestBody List <Books> books) {
-//		return ResponseEntity.ok(booksService.addBooks(books));
+//	@PostMapping("/addAuthors")
+//	public ResponseEntity<?> addAuthors(@RequestBody List <Author> authors) {
+//		return ResponseEntity.ok(authorService.addAuthors(authors));
 //	}
 	
 	
 	@PutMapping("")
-	public ResponseEntity<?> update(@RequestBody Books book) {
-		return ResponseEntity.ok(booksService.update(book));
+	public ResponseEntity<?> update(@RequestBody Author author) {
+		return ResponseEntity.ok(authorService.update(author));
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?>  deleteById(@PathVariable Long id){
-		booksService.deleteById(id);
+		authorService.deleteById(id);
 		return ResponseEntity.ok(null);
 	}
 	
 	@DeleteMapping("")
 	public ResponseEntity<?>  deleteAll() {
-		booksService.deleteAll();
+		authorService.deleteAll();
 		return ResponseEntity.ok(null);
 	}
 
