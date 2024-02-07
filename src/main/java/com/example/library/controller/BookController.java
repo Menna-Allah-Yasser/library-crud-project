@@ -11,34 +11,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.library.model.Author;
-import com.example.library.service.AuthorService;
+import com.example.library.model.Book;
+import com.example.library.service.BookService;
 
 @RestController
-@RequestMapping("/Authors")
-public class AuthorController {
+@RequestMapping("/Books")
+public class BookController {
 	
 	@Autowired
-	private AuthorService authorService;
+	private BookService bookService;
 	
 	@GetMapping("")
-	public List<Author> getAllAuthors(){
-		return authorService.getAllAuthors();
+	public List<Book> getAllBooks(){
+		return bookService.getAllBooks();
 	}
 	
 	@GetMapping("/{id}")
-	public Author getAuthorById(@PathVariable Long id) {
-		return authorService.getAuthorById(id);
+	public Book getBookById(@PathVariable Long id) {
+		return bookService.getBookById(id);
+	}
+	
+	@GetMapping("/author/{id}")
+	public List<Book> getBooksByAuthorId(@PathVariable Long id){
+		return bookService.getBooksByAuthorId(id);
 	}
 	
 	@PostMapping("/add")
-	public Author addAuthor(@RequestBody Author author) {
-		return authorService.addAuthor(author); 
+	public Book addBook(@RequestBody Book book) {
+		return bookService.addBook(book);
 	}
 	
 	@PutMapping("/update")
-	public Author updateAuthor(@RequestBody Author author) {
-		return authorService.updateAuthor(author);
+	public Book updateBook(@RequestBody Book book) {
+		return bookService.updateBook(book);
 	}
 
 }

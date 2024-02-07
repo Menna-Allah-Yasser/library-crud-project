@@ -1,6 +1,5 @@
 package com.example.library.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -21,29 +20,23 @@ public class Author {
 	@Id
 	@Column(name = "Author_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "AUTHOR_GENERATOR")
-	@SequenceGenerator(name = "AUTHOR_GENERATOR", sequenceName = "Books_id", initialValue = 1000)
+	@SequenceGenerator(name = "AUTHOR_GENERATOR", sequenceName = "Author_id", initialValue = 1002)
 	private Long id;
 
-	@Column
-	private String name;
-
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "author", cascade = { CascadeType.REMOVE, CascadeType.MERGE,
-			CascadeType.DETACH, CascadeType.REFRESH })
-
-	private List<Books> books;
+	@Column(name = "FName")
+	private String firstName;
+	
+	@Column(name = "LName")
+	private String lasttName;
 
 	public Author() {
 	}
 
-	public Author(String name) {
+	public Author(Long id, String firstName, String lasttName) {
 		super();
-		this.name = name;
-	}
-
-	public Author(String name, List<Books> books) {
-		super();
-		this.name = name;
-		this.books = books;
+		this.id = id;
+		this.firstName = firstName;
+		this.lasttName = lasttName;
 	}
 
 	public Long getId() {
@@ -54,20 +47,21 @@ public class Author {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public List<Books> getBooks() {
-		return books;
+	public String getLasttName() {
+		return lasttName;
 	}
 
-	public void setBooks(List<Books> books) {
-		this.books = books;
+	public void setLasttName(String lasttName) {
+		this.lasttName = lasttName;
 	}
-
+	
+	
 }
