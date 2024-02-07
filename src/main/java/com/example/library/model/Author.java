@@ -2,6 +2,8 @@ package com.example.library.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,15 +30,19 @@ public class Author {
 	
 	@Column(name = "LName")
 	private String lasttName;
+	
+	@OneToMany(mappedBy = "author" , cascade = CascadeType.ALL)
+	private List<Book> books;
 
 	public Author() {
-	}
+	}	
 
-	public Author(Long id, String firstName, String lasttName) {
+	public Author(Long id, String firstName, String lasttName, List<Book> books) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lasttName = lasttName;
+		this.books = books;
 	}
 
 	public Long getId() {
@@ -62,6 +68,17 @@ public class Author {
 	public void setLasttName(String lasttName) {
 		this.lasttName = lasttName;
 	}
+
+	@JsonManagedReference
+	public List<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
+	
+	
 	
 	
 }

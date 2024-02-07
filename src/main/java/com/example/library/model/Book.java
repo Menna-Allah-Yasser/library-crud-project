@@ -1,5 +1,8 @@
 package com.example.library.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +26,7 @@ public class Book {
 
 	private double price;
 
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name = "author_id")
 	private Author author;
 
@@ -71,6 +74,7 @@ public class Book {
 	}
 
 
+	@JsonBackReference
 	public Author getAuthor() {
 		return author;
 	}
