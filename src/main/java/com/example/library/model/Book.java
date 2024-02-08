@@ -12,6 +12,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Book {
@@ -22,8 +25,11 @@ public class Book {
 	@SequenceGenerator(name = "ID_GENERATOR", sequenceName = "Books_id", initialValue = 2003)
 	private Long id;
 
+	@NotBlank(message = "Name of Book is mandatory")
 	private String name;
 
+	@Min(value = 100 , message = "MIN Price = 100 $ ")
+	@Max(value = 3000 ,message = "MAX Price = 3000 $ ")
 	private double price;
 
 	@ManyToOne()

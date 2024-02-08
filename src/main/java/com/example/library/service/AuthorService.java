@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.library.exception.AuthorNotFoundException;
+import com.example.library.exception.BookNotFoundException;
 import com.example.library.model.Author;
 import com.example.library.repository.AuthorRepo;
 
@@ -19,7 +21,8 @@ public class AuthorService {
 	}
 
 	public Author getAuthorById(Long id) {
-		return authorRepo.findById(id).orElseThrow();
+		return authorRepo.findById(id).
+				orElseThrow(() -> new AuthorNotFoundException("Author with ID: "+id+" NOT Founded"));
 	}
 
 	public Author addAuthor(Author author) {

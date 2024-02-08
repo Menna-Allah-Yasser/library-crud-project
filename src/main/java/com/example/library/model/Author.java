@@ -15,6 +15,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Author {
@@ -26,10 +28,16 @@ public class Author {
 	private Long id;
 
 	@Column(name = "FName")
+	@NotBlank(message = "First Name is mandatory")
 	private String firstName;
 	
 	@Column(name = "LName")
+	@NotBlank(message = "Last Name is mandatory")
 	private String lasttName;
+	
+	@Email
+	@NotBlank(message = "Author Email is  mandatory")
+	private String email;
 	
 	@OneToMany(mappedBy = "author" , cascade = CascadeType.ALL)
 	private List<Book> books;
@@ -37,13 +45,17 @@ public class Author {
 	public Author() {
 	}	
 
-	public Author(Long id, String firstName, String lasttName, List<Book> books) {
+	public Author(Long id, @NotBlank(message = "First Name is mandatory") String firstName, String lasttName,
+			@Email String email, List<Book> books) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lasttName = lasttName;
+		this.email = email;
 		this.books = books;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -67,6 +79,14 @@ public class Author {
 
 	public void setLasttName(String lasttName) {
 		this.lasttName = lasttName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@JsonManagedReference
